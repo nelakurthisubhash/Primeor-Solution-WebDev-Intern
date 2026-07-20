@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Level 3 - Task 1 | Image Manipulation</title>
+<style>
+  :root{
+    --ink:#0f2c4c;
+    --teal:#1aacac;
+    --teal-dark:#128080;
+    --paper:#f6f8fa;
+    --card:#ffffff;
+    --line:#dbe4ea;
+  }
+  *{box-sizing:border-box;}
+  body{margin:0;font-family:'Segoe UI',Tahoma,Geneva,Verdana,sans-serif;background:var(--paper);color:var(--ink);padding:40px 20px;}
+  .wrap{max-width:900px;margin:0 auto;}
+  h1{text-align:center;margin-bottom:6px;}
+  p.sub{text-align:center;color:#5c7284;margin-top:0;margin-bottom:34px;}
+  .card{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:28px 30px;margin-bottom:30px;}
+  .card h2{margin-top:0;font-size:1.15rem;}
+  .card p.desc{color:#5c7284;font-size:.9rem;margin-top:-6px;}
+
+  /* ---------- Gallery ---------- */
+  .gallery{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;}
+  .gallery img{
+    width:100%;height:110px;object-fit:cover;border-radius:10px;cursor:pointer;
+    transition:transform .3s ease, box-shadow .3s ease;
+  }
+  .gallery img:hover{transform:scale(1.06);box-shadow:0 8px 18px rgba(15,44,76,.2);}
+
+  .lightbox{
+    display:none;position:fixed;inset:0;background:rgba(15,44,76,.85);
+    align-items:center;justify-content:center;z-index:200;padding:20px;
+  }
+  .lightbox.active{display:flex;}
+  .lightbox img{max-width:90%;max-height:85vh;border-radius:12px;box-shadow:0 20px 50px rgba(0,0,0,.4);}
+  .lightbox-close{position:absolute;top:24px;right:34px;color:#fff;font-size:2rem;cursor:pointer;line-height:1;}
+
+  /* ---------- Slideshow ---------- */
+  .slideshow{position:relative;max-width:640px;margin:0 auto;border-radius:14px;overflow:hidden;box-shadow:0 8px 24px rgba(15,44,76,.15);}
+  .slides{display:flex;transition:transform .6s ease;}
+  .slides img{width:100%;flex-shrink:0;height:320px;object-fit:cover;}
+  .dots{display:flex;justify-content:center;gap:8px;margin-top:14px;}
+  .dot{width:9px;height:9px;border-radius:50%;background:var(--line);cursor:pointer;transition:.2s;}
+  .dot.active{background:var(--teal);width:22px;border-radius:5px;}
+
+  /* ---------- Hover transitions demo ---------- */
+  .hover-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;}
+  .hover-item{position:relative;border-radius:12px;overflow:hidden;}
+  .hover-item img{width:100%;height:150px;object-fit:cover;display:block;transition:transform .4s ease;}
+  .hover-item:hover img{transform:scale(1.12) rotate(1deg);}
+  .hover-overlay{
+    position:absolute;inset:0;background:linear-gradient(0deg,rgba(15,44,76,.75),transparent 60%);
+    display:flex;align-items:flex-end;padding:12px;color:#fff;font-weight:600;font-size:.85rem;
+    opacity:0;transition:opacity .3s ease;
+  }
+  .hover-item:hover .hover-overlay{opacity:1;}
+
+  @media (max-width:640px){
+    .gallery{grid-template-columns:repeat(2,1fr);}
+    .hover-grid{grid-template-columns:1fr;}
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <h1>Level 3 &mdash; Task 1: Image Manipulation</h1>
+  <p class="sub">Gallery with enlarge-on-click, auto slideshow, and hover transitions</p>
+
+  <!-- 1. Gallery with enlarge on click -->
+  <div class="card">
+    <h2>1. Thumbnail gallery (click to enlarge)</h2>
+    <p class="desc">Click any thumbnail to view it enlarged.</p>
+    <div class="gallery" id="gallery">
+      <img src="https://images.unsplash.com/photo-1498050108023-c5249f4df085?w=400&q=80" alt="Gallery image 1">
+      <img src="https://images.unsplash.com/photo-1461749280684-dccba630e2f6?w=400&q=80" alt="Gallery image 2">
+      <img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=400&q=80" alt="Gallery image 3">
+      <img src="https://images.unsplash.com/photo-1519389950473-47ba0277781c?w=400&q=80" alt="Gallery image 4">
+    </div>
+  </div>
+
+  <!-- Lightbox -->
+  <div class="lightbox" id="lightbox">
+    <span class="lightbox-close" id="lightboxClose">&times;</span>
+    <img id="lightboxImg" src="" alt="Enlarged image">
+  </div>
+
+  <!-- 2. Auto slideshow -->
+  <div class="card">
+    <h2>2. Auto-transitioning slideshow</h2>
+    <p class="desc">Images change automatically every 3 seconds.</p>
+    <div class="slideshow">
+      <div class="slides" id="slides">
+        <img src="https://images.unsplash.com/photo-1498050108023-c5249f4df085?w=700&q=80" alt="Slide 1">
+        <img src="https://images.unsplash.com/photo-1461749280684-dccba630e2f6?w=700&q=80" alt="Slide 2">
+        <img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=700&q=80" alt="Slide 3">
+      </div>
+    </div>
+    <div class="dots" id="dots"></div>
+  </div>
+
+  <!-- 3. Hover effects -->
+  <div class="card">
+    <h2>3. Smooth hover effects</h2>
+    <p class="desc">Hover over an image to see it zoom with a caption overlay.</p>
+    <div class="hover-grid">
+      <div class="hover-item">
+        <img src="https://images.unsplash.com/photo-1498050108023-c5249f4df085?w=400&q=80" alt="Hover 1">
+        <div class="hover-overlay">Web Development</div>
+      </div>
+      <div class="hover-item">
+        <img src="https://images.unsplash.com/photo-1461749280684-dccba630e2f6?w=400&q=80" alt="Hover 2">
+        <div class="hover-overlay">Frontend Craft</div>
+      </div>
+      <div class="hover-item">
+        <img src="https://images.unsplash.com/photo-1519389950473-47ba0277781c?w=400&q=80" alt="Hover 3">
+        <div class="hover-overlay">Team Learning</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+  // 1. Lightbox gallery
+  const gallery = document.getElementById('gallery');
+  const lightbox = document.getElementById('lightbox');
+  const lightboxImg = document.getElementById('lightboxImg');
+  gallery.addEventListener('click', function(e){
+    if (e.target.tagName === 'IMG') {
+      lightboxImg.src = e.target.src;
+      lightbox.classList.add('active');
+    }
+  });
+  document.getElementById('lightboxClose').addEventListener('click', () => lightbox.classList.remove('active'));
+  lightbox.addEventListener('click', function(e){
+    if (e.target === lightbox) lightbox.classList.remove('active');
+  });
+
+  // 2. Auto slideshow
+  const slidesEl = document.getElementById('slides');
+  const slideCount = slidesEl.children.length;
+  const dotsEl = document.getElementById('dots');
+  let current = 0;
+
+  for (let i = 0; i < slideCount; i++) {
+    const dot = document.createElement('div');
+    dot.className = 'dot' + (i === 0 ? ' active' : '');
+    dot.addEventListener('click', () => goToSlide(i));
+    dotsEl.appendChild(dot);
+  }
+
+  function goToSlide(index){
+    current = index;
+    slidesEl.style.transform = `translateX(-${current * 100}%)`;
+    [...dotsEl.children].forEach((d, i) => d.classList.toggle('active', i === current));
+  }
+
+  setInterval(function(){
+    current = (current + 1) % slideCount;
+    goToSlide(current);
+  }, 3000);
+</script>
+</body>
+</html>

@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Level 1 - Task 2 | JavaScript</title>
+<style>
+  :root{
+    --ink:#0f2c4c;
+    --teal:#1aacac;
+    --teal-dark:#128080;
+    --paper:#f6f8fa;
+    --card:#ffffff;
+    --line:#dbe4ea;
+  }
+  *{box-sizing:border-box;}
+  body{
+    margin:0;
+    font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background:var(--paper);
+    color:var(--ink);
+    padding:40px 20px;
+  }
+  .wrap{max-width:760px;margin:0 auto;}
+  h1{text-align:center;margin-bottom:6px;}
+  p.sub{text-align:center;color:#5c7284;margin-top:0;margin-bottom:36px;}
+
+  .card{
+    background:var(--card);
+    border:1px solid var(--line);
+    border-radius:14px;
+    padding:28px 30px;
+    margin-bottom:26px;
+    box-shadow:0 4px 14px rgba(15,44,76,.05);
+  }
+  .card h2{margin-top:0;font-size:1.15rem;color:var(--ink);}
+  .card p.desc{color:#5c7284;font-size:.9rem;margin-top:-6px;}
+
+  /* Task A: color-changing button */
+  #colorBtn{
+    display:block;
+    margin:18px auto 4px;
+    padding:14px 34px;
+    font-size:1rem;
+    font-weight:600;
+    color:#fff;
+    background:var(--teal);
+    border:none;
+    border-radius:10px;
+    cursor:pointer;
+    transition:background .25s ease, transform .15s ease;
+  }
+  #colorBtn:hover{transform:translateY(-2px);}
+  #colorBtn:active{transform:translateY(0);}
+
+  /* Task B: greeting */
+  #greetBtn{
+    padding:12px 26px;
+    background:var(--ink);
+    color:#fff;
+    border:none;
+    border-radius:8px;
+    cursor:pointer;
+    font-weight:600;
+  }
+  #greetBtn:hover{background:#183a5c;}
+  #greetResult{
+    margin-top:14px;
+    font-size:1.05rem;
+    font-weight:600;
+    color:var(--teal-dark);
+    min-height:1.4em;
+  }
+
+  /* Task C: calculator */
+  .calc-row{display:flex;gap:12px;flex-wrap:wrap;margin-bottom:16px;}
+  .calc-row input{
+    flex:1;
+    min-width:120px;
+    padding:11px 14px;
+    border:1px solid var(--line);
+    border-radius:8px;
+    font-size:.95rem;
+    outline:none;
+  }
+  .calc-row input:focus{border-color:var(--teal);box-shadow:0 0 0 3px rgba(26,172,172,.15);}
+  #calcBtn{
+    padding:11px 24px;
+    background:var(--teal);
+    color:#fff;
+    border:none;
+    border-radius:8px;
+    font-weight:600;
+    cursor:pointer;
+  }
+  #calcBtn:hover{background:var(--teal-dark);}
+  #calcResult{
+    margin-top:14px;
+    font-size:1.1rem;
+    font-weight:700;
+  }
+  #calcError{color:#c0392b;font-size:.85rem;margin-top:8px;}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <h1>Level 1 &mdash; Task 2: JavaScript</h1>
+  <p class="sub">Interactive button, dynamic greeting, and a simple calculator</p>
+
+  <!-- 1. Interactive color-changing button -->
+  <div class="card">
+    <h2>1. Color-changing button</h2>
+    <p class="desc">Click the button below to change its background color.</p>
+    <button id="colorBtn">Click me</button>
+  </div>
+
+  <!-- 2. Greeting based on system time -->
+  <div class="card">
+    <h2>2. Dynamic greeting</h2>
+    <p class="desc">Shows a greeting based on your current system time.</p>
+    <button id="greetBtn">Show greeting</button>
+    <div id="greetResult"></div>
+  </div>
+
+  <!-- 3. Simple calculator -->
+  <div class="card">
+    <h2>3. Simple calculator (addition)</h2>
+    <p class="desc">Enter two numbers to see their sum, with input validation.</p>
+    <div class="calc-row">
+      <input type="text" id="num1" placeholder="First number">
+      <input type="text" id="num2" placeholder="Second number">
+      <button id="calcBtn">Add</button>
+    </div>
+    <div id="calcResult"></div>
+    <div id="calcError"></div>
+  </div>
+</div>
+
+<script>
+  // 1. Color-changing button
+  const colors = ['#1aacac', '#0f2c4c', '#e07a3e', '#7b4fb0', '#2e8b57'];
+  let colorIndex = 0;
+  const colorBtn = document.getElementById('colorBtn');
+  colorBtn.addEventListener('click', function () {
+    colorIndex = (colorIndex + 1) % colors.length;
+    colorBtn.style.background = colors[colorIndex];
+  });
+
+  // 2. Dynamic greeting based on system time
+  document.getElementById('greetBtn').addEventListener('click', function () {
+    const hour = new Date().getHours();
+    let message;
+    if (hour < 12) {
+      message = 'Good Morning! ☀️';
+    } else if (hour < 17) {
+      message = 'Good Afternoon! 🌤️';
+    } else {
+      message = 'Good Evening! 🌙';
+    }
+    document.getElementById('greetResult').textContent = message;
+  });
+
+  // 3. Simple calculator with validation
+  document.getElementById('calcBtn').addEventListener('click', function () {
+    const val1 = document.getElementById('num1').value.trim();
+    const val2 = document.getElementById('num2').value.trim();
+    const resultEl = document.getElementById('calcResult');
+    const errorEl = document.getElementById('calcError');
+
+    resultEl.textContent = '';
+    errorEl.textContent = '';
+
+    if (val1 === '' || val2 === '') {
+      errorEl.textContent = 'Please enter both numbers.';
+      return;
+    }
+    const n1 = Number(val1);
+    const n2 = Number(val2);
+    if (isNaN(n1) || isNaN(n2)) {
+      errorEl.textContent = 'Please enter valid numeric values only.';
+      return;
+    }
+    resultEl.textContent = 'Result: ' + (n1 + n2);
+  });
+</script>
+</body>
+</html>

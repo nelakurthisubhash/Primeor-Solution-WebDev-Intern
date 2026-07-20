@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Web Developer Internship Program | Primeor Solutions</title>
+<style>
+  :root{
+    --ink:#0f2c4c;
+    --teal:#1aacac;
+    --teal-dark:#128080;
+    --paper:#f6f8fa;
+    --card:#ffffff;
+    --line:#dbe4ea;
+    --accent:#e07a3e;
+  }
+  *{box-sizing:border-box;}
+  body{margin:0;font-family:'Segoe UI',Tahoma,Geneva,Verdana,sans-serif;background:var(--paper);color:var(--ink);line-height:1.6;}
+  a{text-decoration:none;}
+  .container{max-width:1100px;margin:0 auto;padding:0 24px;}
+
+  /* Nav */
+  nav{background:var(--ink);}
+  .nav-wrap{display:flex;align-items:center;justify-content:space-between;padding:16px 0;max-width:1100px;margin:0 auto;padding-left:24px;padding-right:24px;}
+  .brand{color:#fff;font-weight:700;font-size:1.2rem;}
+  .brand span{color:var(--teal);}
+  .nav-cta{background:var(--teal);color:#fff;padding:9px 20px;border-radius:8px;font-weight:600;font-size:.9rem;}
+  .nav-cta:hover{background:var(--teal-dark);}
+
+  /* Hero / headline */
+  .hero{padding:70px 0 60px;text-align:center;background:linear-gradient(180deg,#0f2c4c 0%,#123a63 100%);color:#fff;}
+  .hero .eyebrow{display:inline-block;background:rgba(26,172,172,.18);color:#7fe3e3;padding:6px 16px;border-radius:20px;font-size:.8rem;font-weight:600;margin-bottom:18px;}
+  .hero h1{font-size:2.5rem;margin:0 0 16px;max-width:760px;margin-left:auto;margin-right:auto;}
+  .hero p{color:#c9d9e5;max-width:600px;margin:0 auto 30px;font-size:1.05rem;}
+  .cta-group{display:flex;gap:14px;justify-content:center;flex-wrap:wrap;}
+  .btn-primary{background:var(--teal);color:#fff;padding:13px 28px;border-radius:8px;font-weight:600;}
+  .btn-primary:hover{background:var(--teal-dark);}
+  .btn-secondary{background:transparent;color:#fff;padding:13px 28px;border-radius:8px;font-weight:600;border:1.5px solid rgba(255,255,255,.4);}
+  .btn-secondary:hover{border-color:#fff;}
+
+  /* Highlights */
+  section.highlights{padding:64px 0;}
+  .section-head{text-align:center;margin-bottom:40px;}
+  .section-head h2{margin:0 0 8px;font-size:1.8rem;}
+  .section-head p{color:#5c7284;margin:0;}
+  .highlight-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:20px;}
+  .highlight-card{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:26px 22px;text-align:center;transition:.25s;}
+  .highlight-card:hover{transform:translateY(-6px);box-shadow:0 12px 26px rgba(15,44,76,.1);}
+  .highlight-card .icon{font-size:1.8rem;margin-bottom:12px;}
+  .highlight-card h3{font-size:1rem;margin:0 0 8px;}
+  .highlight-card p{color:#5c7284;font-size:.85rem;margin:0;}
+
+  /* Qualifications */
+  section.qualifications{background:var(--card);padding:60px 0;border-top:1px solid var(--line);border-bottom:1px solid var(--line);}
+  .qual-list{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;max-width:800px;margin:0 auto;}
+  .qual-item{background:#f6f8fa;border-radius:10px;padding:16px 18px;font-weight:600;font-size:.9rem;text-align:center;color:var(--ink);}
+
+  /* CTA banner */
+  section.cta-banner{padding:70px 0;text-align:center;}
+  .cta-banner h2{font-size:1.8rem;margin:0 0 10px;}
+  .cta-banner p{color:#5c7284;margin:0 0 26px;}
+
+  /* Footer */
+  footer{background:var(--ink);color:#c9d9e5;padding:40px 0;}
+  .footer-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:24px;}
+  .footer-grid h4{color:#fff;margin:0 0 10px;font-size:.95rem;}
+  .footer-grid p, .footer-grid a{color:#a9bccb;font-size:.88rem;display:block;margin-bottom:6px;}
+  .footer-grid a:hover{color:var(--teal);}
+  .footer-bottom{text-align:center;color:#7d93a5;font-size:.8rem;margin-top:30px;padding-top:20px;border-top:1px solid rgba(255,255,255,.08);}
+
+  @media (max-width:900px){
+    .highlight-grid{grid-template-columns:repeat(2,1fr);}
+    .qual-list{grid-template-columns:repeat(2,1fr);}
+    .footer-grid{grid-template-columns:repeat(2,1fr);}
+  }
+  @media (max-width:560px){
+    .hero h1{font-size:1.8rem;}
+    .highlight-grid{grid-template-columns:1fr;}
+    .qual-list{grid-template-columns:1fr;}
+    .footer-grid{grid-template-columns:1fr;}
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-wrap">
+    <div class="brand">Primeor<span>.</span>Solutions</div>
+    <a href="#apply" class="nav-cta">Apply Now</a>
+  </div>
+</nav>
+
+<header class="hero">
+  <div class="container">
+    <span class="eyebrow">Internship Program &middot; 2026</span>
+    <h1>Web Developer Internship Program at Primeor Solutions</h1>
+    <p>A hands-on, project-based internship where you build real frontend
+       projects, sharpen practical skills, and walk away with a portfolio
+       that speaks for itself. Duration: 4&ndash;8 weeks, self-paced across
+       three skill levels.</p>
+    <div class="cta-group">
+      <a href="#apply" class="btn-primary">Apply Now</a>
+      <a href="#highlights" class="btn-secondary">Learn More</a>
+    </div>
+  </div>
+</header>
+
+<section class="highlights" id="highlights">
+  <div class="container">
+    <div class="section-head">
+      <h2>Why intern with us</h2>
+      <p>Everything is designed around practical, portfolio-ready outcomes.</p>
+    </div>
+    <div class="highlight-grid">
+      <div class="highlight-card">
+        <div class="icon">🌍</div>
+        <h3>Real-world experience</h3>
+        <p>Work on tasks modeled after actual client and product requirements.</p>
+      </div>
+      <div class="highlight-card">
+        <div class="icon">🗂️</div>
+        <h3>Portfolio development</h3>
+        <p>Finish with deployed projects you can show recruiters and clients.</p>
+      </div>
+      <div class="highlight-card">
+        <div class="icon">🎨</div>
+        <h3>Practical frontend exposure</h3>
+        <p>HTML, CSS, JavaScript, and modern frameworks like Bootstrap &amp; Tailwind.</p>
+      </div>
+      <div class="highlight-card">
+        <div class="icon">🛠️</div>
+        <h3>Hands-on projects</h3>
+        <p>Three progressive levels, from fundamentals to a full landing page.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="qualifications">
+  <div class="container">
+    <div class="section-head">
+      <h2>What you should know</h2>
+      <p>No prior professional experience required &mdash; just a willingness to build.</p>
+    </div>
+    <div class="qual-list">
+      <div class="qual-item">HTML &amp; CSS</div>
+      <div class="qual-item">JavaScript basics</div>
+      <div class="qual-item">Git &amp; GitHub</div>
+      <div class="qual-item">Responsive design</div>
+      <div class="qual-item">Bootstrap / Tailwind</div>
+      <div class="qual-item">Willingness to learn</div>
+    </div>
+  </div>
+</section>
+
+<section class="cta-banner" id="apply">
+  <div class="container">
+    <h2>Ready to start building?</h2>
+    <p>Submit your application and begin your Level 1 tasks today.</p>
+    <div class="cta-group">
+      <a href="mailto:info@primeorsolutions.in" class="btn-primary" style="background:var(--teal);color:#fff;">Apply Now</a>
+      <a href="#highlights" class="btn-secondary" style="border-color:#0f2c4c;color:#0f2c4c;">Learn More</a>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="container">
+    <div class="footer-grid">
+      <div>
+        <h4>Primeor Solutions</h4>
+        <p>Where Data Drives Strategy and Growth.</p>
+      </div>
+      <div>
+        <h4>Website</h4>
+        <a href="https://www.primeorsolutions.in" target="_blank" rel="noopener">www.primeorsolutions.in</a>
+      </div>
+      <div>
+        <h4>Email</h4>
+        <a href="mailto:info@primeorsolutions.in">info@primeorsolutions.in</a>
+      </div>
+      <div>
+        <h4>Connect</h4>
+        <a href="#" target="_blank" rel="noopener">LinkedIn: @primeor-solutions</a>
+        <a href="#" target="_blank" rel="noopener">Instagram: @primeorsolutions</a>
+      </div>
+    </div>
+    <div class="footer-bottom">&copy; 2026 Primeor Solutions &mdash; Web Development Internship Program</div>
+  </div>
+</footer>
+
+</body>
+</html>

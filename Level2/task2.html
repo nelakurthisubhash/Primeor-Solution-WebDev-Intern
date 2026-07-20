@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Level 2 - Task 2 | Responsive Design</title>
+<style>
+  :root{
+    --ink:#0f2c4c;
+    --teal:#1aacac;
+    --teal-dark:#128080;
+    --paper:#f6f8fa;
+    --card:#ffffff;
+    --line:#dbe4ea;
+  }
+  *{box-sizing:border-box;}
+  body{margin:0;font-family:'Segoe UI',Tahoma,Geneva,Verdana,sans-serif;background:var(--paper);color:var(--ink);}
+
+  /* ---------- Nav with hamburger ---------- */
+  nav{background:var(--ink);position:relative;}
+  .nav-wrap{max-width:1100px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;padding:16px 24px;}
+  .brand{color:#fff;font-weight:700;font-size:1.2rem;}
+  .brand span{color:var(--teal);}
+  .nav-links{list-style:none;display:flex;gap:6px;margin:0;padding:0;}
+  .nav-links a{color:#dbe9f0;text-decoration:none;padding:9px 15px;border-radius:6px;font-weight:500;transition:.2s;}
+  .nav-links a:hover{background:var(--teal);color:#fff;}
+  .hamburger{display:none;flex-direction:column;gap:5px;background:none;border:none;cursor:pointer;z-index:20;}
+  .hamburger span{width:26px;height:3px;background:#fff;border-radius:2px;transition:.3s;}
+  .hamburger.active span:nth-child(1){transform:translateY(8px) rotate(45deg);}
+  .hamburger.active span:nth-child(2){opacity:0;}
+  .hamburger.active span:nth-child(3){transform:translateY(-8px) rotate(-45deg);}
+
+  /* ---------- Layout demo ---------- */
+  .intro{max-width:1100px;margin:40px auto;padding:0 24px;}
+  .intro h1{margin-bottom:6px;}
+  .intro p{color:#5c7284;}
+
+  .device-note{
+    display:inline-block;background:#e7f6f6;color:var(--teal-dark);
+    padding:6px 14px;border-radius:20px;font-size:.8rem;font-weight:600;margin-bottom:14px;
+  }
+
+  .layout-grid{max-width:1100px;margin:0 auto 60px;padding:0 24px;display:grid;grid-template-columns:repeat(3,1fr);gap:20px;}
+  .layout-box{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:24px;text-align:center;}
+  .layout-box .icon{font-size:1.8rem;margin-bottom:8px;}
+  .layout-box h3{margin:0 0 8px;font-size:1rem;}
+  .layout-box p{color:#5c7284;font-size:.85rem;margin:0;}
+
+  footer{text-align:center;padding:22px;color:#7d8fa0;font-size:.85rem;border-top:1px solid var(--line);}
+
+  /* ---------- Media queries: Tablet ---------- */
+  @media (max-width:900px){
+    .layout-grid{grid-template-columns:repeat(2,1fr);}
+  }
+
+  /* ---------- Media queries: Mobile ---------- */
+  @media (max-width:640px){
+    .hamburger{display:flex;}
+    .nav-links{
+      position:absolute;top:100%;left:0;right:0;
+      background:var(--ink);flex-direction:column;
+      max-height:0;overflow:hidden;transition:max-height .3s ease;
+    }
+    .nav-links.open{max-height:260px;padding:8px 0;}
+    .nav-links a{display:block;padding:14px 24px;}
+    .layout-grid{grid-template-columns:1fr;}
+    .intro h1{font-size:1.6rem;}
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-wrap">
+    <div class="brand">Primeor<span>.</span>Intern</div>
+    <button class="hamburger" id="hamburger" aria-label="Toggle menu">
+      <span></span><span></span><span></span>
+    </button>
+    <ul class="nav-links" id="navLinks">
+      <li><a href="#home">Home</a></li>
+      <li><a href="#about">About</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+  </div>
+</nav>
+
+<div class="intro" id="home">
+  <span class="device-note" id="deviceLabel">Resize the window to test</span>
+  <h1>Responsive Design with Media Queries</h1>
+  <p>This page adapts across mobile, tablet, and desktop breakpoints. Shrink the
+     browser to see the 3-column layout become 2 columns, then 1 &mdash; and watch
+     the navigation collapse into a hamburger menu below 640px.</p>
+</div>
+
+<div class="layout-grid">
+  <div class="layout-box">
+    <div class="icon">🖥️</div>
+    <h3>Desktop</h3>
+    <p>3-column layout, full navigation bar visible.</p>
+  </div>
+  <div class="layout-box">
+    <div class="icon">📱</div>
+    <h3>Tablet</h3>
+    <p>Layout reflows to 2 columns for medium screens.</p>
+  </div>
+  <div class="layout-box">
+    <div class="icon">📲</div>
+    <h3>Mobile</h3>
+    <p>Single column layout with a hamburger navigation menu.</p>
+  </div>
+</div>
+
+<footer id="contact">&copy; 2026 Nelakurthi Subhash &mdash; Primeor Solutions Internship</footer>
+
+<script>
+  const hamburger = document.getElementById('hamburger');
+  const navLinks = document.getElementById('navLinks');
+  hamburger.addEventListener('click', function(){
+    hamburger.classList.toggle('active');
+    navLinks.classList.toggle('open');
+  });
+
+  function updateDeviceLabel(){
+    const w = window.innerWidth;
+    const label = document.getElementById('deviceLabel');
+    if (w <= 640) label.textContent = 'Current view: Mobile (' + w + 'px)';
+    else if (w <= 900) label.textContent = 'Current view: Tablet (' + w + 'px)';
+    else label.textContent = 'Current view: Desktop (' + w + 'px)';
+  }
+  window.addEventListener('resize', updateDeviceLabel);
+  updateDeviceLabel();
+</script>
+</body>
+</html>

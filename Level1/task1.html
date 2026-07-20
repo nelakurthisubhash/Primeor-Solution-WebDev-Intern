@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Level 1 - Task 1 | HTML & CSS</title>
+<style>
+  :root{
+    --ink:#0f2c4c;
+    --teal:#1aacac;
+    --teal-dark:#128080;
+    --paper:#f6f8fa;
+    --card:#ffffff;
+    --line:#dbe4ea;
+  }
+  *{box-sizing:border-box;}
+  body{
+    margin:0;
+    font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background:var(--paper);
+    color:var(--ink);
+    line-height:1.6;
+  }
+
+  /* ---------- Navigation ---------- */
+  nav{
+    background:var(--ink);
+    position:sticky;
+    top:0;
+    z-index:100;
+  }
+  .nav-wrap{
+    max-width:1100px;
+    margin:0 auto;
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    padding:16px 24px;
+  }
+  .brand{
+    color:#fff;
+    font-size:1.3rem;
+    font-weight:700;
+    letter-spacing:.5px;
+  }
+  .brand span{color:var(--teal);}
+  .nav-links{
+    list-style:none;
+    display:flex;
+    gap:8px;
+    margin:0;
+    padding:0;
+  }
+  .nav-links a{
+    color:#dbe9f0;
+    text-decoration:none;
+    padding:10px 16px;
+    border-radius:6px;
+    font-weight:500;
+    transition:.25s ease;
+    display:inline-block;
+  }
+  .nav-links a:hover{
+    background:var(--teal);
+    color:#fff;
+    transform:translateY(-2px);
+  }
+  .menu-toggle{
+    display:none;
+    flex-direction:column;
+    gap:5px;
+    background:none;
+    border:none;
+    cursor:pointer;
+  }
+  .menu-toggle span{
+    width:26px;
+    height:3px;
+    background:#fff;
+    border-radius:2px;
+  }
+
+  /* ---------- Hero ---------- */
+  header.hero{
+    max-width:1100px;
+    margin:48px auto;
+    padding:0 24px;
+    display:grid;
+    grid-template-columns:1.1fr .9fr;
+    gap:36px;
+    align-items:center;
+  }
+  .hero-text h1{
+    font-size:2.4rem;
+    margin:0 0 14px;
+  }
+  .hero-text p{
+    color:#4a5f70;
+    font-size:1.05rem;
+    margin:0 0 20px;
+  }
+  .badge{
+    display:inline-block;
+    background:#e7f6f6;
+    color:var(--teal-dark);
+    padding:6px 14px;
+    border-radius:20px;
+    font-size:.8rem;
+    font-weight:600;
+    margin-bottom:16px;
+  }
+  .hero img{
+    width:100%;
+    border-radius:16px;
+    box-shadow:0 16px 32px rgba(15,44,76,.18);
+  }
+
+  /* ---------- Content section ---------- */
+  section.content{
+    max-width:1100px;
+    margin:0 auto 48px;
+    padding:0 24px;
+  }
+  .content .card{
+    background:var(--card);
+    border:1px solid var(--line);
+    border-radius:14px;
+    padding:28px 32px;
+  }
+  .content h2{margin-top:0;}
+
+  /* ---------- Form ---------- */
+  form.contact-form{
+    max-width:1100px;
+    margin:0 auto 60px;
+    padding:0 24px;
+  }
+  .form-card{
+    background:var(--card);
+    border:1px solid var(--line);
+    border-radius:14px;
+    padding:32px;
+    max-width:480px;
+  }
+  .form-card h2{margin-top:0;}
+  label{
+    display:block;
+    font-weight:600;
+    font-size:.9rem;
+    margin:16px 0 6px;
+  }
+  input[type="text"], input[type="email"]{
+    width:100%;
+    padding:11px 14px;
+    border:1px solid var(--line);
+    border-radius:8px;
+    font-size:.95rem;
+    outline:none;
+    transition:.2s;
+  }
+  input:focus{
+    border-color:var(--teal);
+    box-shadow:0 0 0 3px rgba(26,172,172,.15);
+  }
+  button.submit-btn{
+    margin-top:22px;
+    background:var(--teal);
+    color:#fff;
+    border:none;
+    padding:12px 26px;
+    border-radius:8px;
+    font-size:.95rem;
+    font-weight:600;
+    cursor:pointer;
+    transition:.2s;
+  }
+  button.submit-btn:hover{
+    background:var(--teal-dark);
+    transform:translateY(-2px);
+  }
+
+  footer{
+    text-align:center;
+    padding:24px;
+    color:#7d8fa0;
+    font-size:.85rem;
+    border-top:1px solid var(--line);
+  }
+
+  /* ---------- Responsive ---------- */
+  @media (max-width:800px){
+    header.hero{grid-template-columns:1fr;}
+    .menu-toggle{display:flex;}
+    .nav-links{
+      position:absolute;
+      top:64px;
+      left:0;
+      right:0;
+      background:var(--ink);
+      flex-direction:column;
+      max-height:0;
+      overflow:hidden;
+      transition:max-height .3s ease;
+    }
+    .nav-links.open{max-height:260px;padding:10px 0;}
+    .nav-links a{padding:14px 24px;}
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-wrap">
+    <div class="brand">Primeor<span>.</span>Intern</div>
+    <button class="menu-toggle" id="menuToggle" aria-label="Toggle menu">
+      <span></span><span></span><span></span>
+    </button>
+    <ul class="nav-links" id="navLinks">
+      <li><a href="#home">Home</a></li>
+      <li><a href="#about">About</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+  </div>
+</nav>
+
+<header class="hero" id="home">
+  <div class="hero-text">
+    <span class="badge">Web Development Internship</span>
+    <h1>Building my first styled webpage with HTML &amp; CSS</h1>
+    <p>This page is Level 1 - Task 1 of the Primeor Solutions Web Development
+       Internship: a heading, paragraph, image, spacing, a working form, and a
+       responsive navigation menu with hover effects.</p>
+  </div>
+  <img src="https://images.unsplash.com/photo-1498050108023-c5249f4df085?w=700&q=80"
+       alt="Laptop with code on screen">
+</header>
+
+<section class="content" id="about">
+  <div class="card">
+    <h2>About this task</h2>
+    <p>The goal of this task is to practice the fundamentals of front-end
+       development: structuring content with semantic HTML, applying spacing
+       and background colors with CSS, and making a page that feels clean and
+       user-friendly on any screen size. Resize the browser window to see the
+       navigation menu turn into a hamburger menu on smaller screens.</p>
+  </div>
+</section>
+
+<form class="contact-form" id="contact">
+  <div class="form-card">
+    <h2>Get in touch</h2>
+    <label for="name">Your name</label>
+    <input type="text" id="name" name="name" placeholder="Full name" required>
+
+    <label for="email">Email address</label>
+    <input type="email" id="email" name="email" placeholder="you@example.com" required>
+
+    <button type="submit" class="submit-btn">Submit</button>
+  </div>
+</form>
+
+<footer>&copy; 2026 Nelakurthi Subhash &mdash; Primeor Solutions Internship</footer>
+
+<script>
+  document.getElementById('menuToggle').addEventListener('click', function(){
+    document.getElementById('navLinks').classList.toggle('open');
+  });
+  document.querySelector('.contact-form').addEventListener('submit', function(e){
+    e.preventDefault();
+    alert('Thanks! Your message has been submitted.');
+    this.reset();
+  });
+</script>
+</body>
+</html>
